@@ -1,0 +1,34 @@
+{% extends './layout.html' %}
+
+{%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
+
+{%block body%}
+<h1>Nuevo pedido</h1>
+<form action="" method="post">
+    <label for="Direccion">Direccion:</label>
+    <input type="text" id="direccion" name = "direccion" required><br>
+
+    <label for="Tipo">Tipo:</label>
+    <select id="tipo" name = "tipò" required>
+        <option value="" disabled selected>Seleccione el tipo de pizza</option>
+        <option value="Margharita">Margharita</option>
+        <option value="Prosciutto">Prosciutto</option>
+        <option value="Pepperoni">Pepperoni</option>
+        <option value="Rucula">Rucula</option>
+        <option value="Hawaiana">Hawaiana</option>
+        <option value="Marinera">Marinera</option>
+    </select><br>
+
+    <label for="Hora">Hora de entrega:</label>
+        <input type="time" id="hora" name="hora" step="60" required><br>
+
+    <button type="submit">Enviar</button>
+
+</form>
+<button id = "Vuelta" onclick="volver()">Volver</button>
+<script>
+    function volver(){
+        window.location.href = 'http://127.0.0.1:5000';
+    }
+</script>
+{%endblock%}

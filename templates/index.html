@@ -1,0 +1,32 @@
+{% extends './layout.html' %}
+
+{%block title%} {{data.Titulo}} {%endblock%}
+
+{%block body%}
+<h1>Elija la acción a realizar</h1>
+<button id = "boton1" onclick="caso1()">Insertar/Eliminar una tupla</button><br>
+<button id = "boton2" onclick="caso2()">Nuevo pedido</button><br>
+<button id = "boton3" onclick="caso3()">Mostrar tablas</button>
+
+<script>
+    function quitarBotonesIniciales(){
+        var boton = document.getElementById('boton1');
+            boton.parentNode.removeChild(boton);
+        var boton = document.getElementById('boton2');
+            boton.parentNode.removeChild(boton); 
+        var boton = document.getElementById('boton3');
+            boton.parentNode.removeChild(boton);
+        var boton = document.getElementById('boton4');
+            boton.parentNode.removeChild(boton);
+    }
+    function caso1(){
+        window.location.href = 'caso1.html';
+    }
+    function caso2(){
+        window.location.href = 'caso2.html';
+    }
+    function caso3(){
+        window.location.href = 'caso3.html';
+    }
+</script>
+{%endblock%}
