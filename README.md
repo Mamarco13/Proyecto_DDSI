@@ -1,2 +1,3 @@
-# Proyecto_DDSI
-Para iniciar la interfaz solamente ejecutar el script de arranque **arranque_interfaz.sh**
+# DDSI
+### Iniciar interfaz
+Ejecutar el script de arranque: **arranque_interfaz.sh**
