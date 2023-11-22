@@ -2,7 +2,7 @@
 ### Iniciar interfaz
 Ejecutar el script de arranque: **arranque_interfaz.sh**.
 
-###Distribución de archivos
+### Distribución de archivos
 **interfaz.py** es el archivo "guía" programado en python y tiene todo el mapeado de htmls a los que acceder y la conexión con las BD en la que le pasemos las variables para realizar las acciones
 **main.py** crea la BD
 
