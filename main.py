@@ -3,7 +3,7 @@ import oracledb
 try:
     conexion = oracledb.connect(user="x0607565", password="x0607565", dsn="(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP) (HOST=oracle0.ugr.es)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=practbd.oracle0.ugr.es)))")
 
-    print('concexion existosa')
+    print('conexion existosa')
 except:
     print("error")
     
