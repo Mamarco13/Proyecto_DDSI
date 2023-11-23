@@ -6,25 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%}{%endblock%}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
-    <style>
-    body{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-    }
-
-    button{
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-bottom: 10px;
-    }
-
-    .botones{
-        text-align: center;
-    }
-    </style>
 </head>
 <body>
     {%block body%}

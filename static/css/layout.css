@@ -2,3 +2,22 @@ body{
     background-color: palegoldenrod;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.botones {
+    text-align: center;
+    margin-top: 20px; /* Ajusta según sea necesario para el espacio entre el título y los botones */
+}
+button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
