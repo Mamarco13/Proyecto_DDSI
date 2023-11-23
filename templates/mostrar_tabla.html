@@ -1,0 +1,30 @@
+{% extends './layout.html' %}
+
+{%block title%} Pizzeria Ave Phoenix {%endblock%}
+
+{%block body%}
+    <h1>Tabla Mostrada</h1>
+
+    {% if datos_tabla %}
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for column_name in datos_tabla[0] %}
+                        <th>{{ column_name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in datos_tabla %}
+                    <tr>
+                        {% for value in row %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay datos para mostrar en la tabla.</p>
+    {% endif %}
+{%endblock%}
