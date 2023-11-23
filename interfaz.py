@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import oracledb
 
 app = Flask(__name__)
@@ -17,7 +17,8 @@ def cerrar_conexion(conexion):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('index.html', image_url=image_url)
 
 
 @app.route('/procesar_pedido', methods=['POST'])
@@ -26,6 +27,8 @@ def procesar_pedido():
         direccion = request.form['direccion']
         tipo = request.form['tipo']
         hora = request.form['hora']
+        DNI = request.form['DNI']
+        ID = request.form['ID']
     conexion = conectar_base_de_datos()
     #Aqui codigo para procesar el pedido
     cerrar_conexion(conexion)
