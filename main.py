@@ -31,7 +31,6 @@ consulta = """CREATE TABLE RecibeSueldo(
     Cantidad NUMBER,
     Fecha DATE,
     PRIMARY KEY(DNI,IDSUELDO)) """
-
 cursorInsertar.execute(consulta)
 
 #Tabla EmpleadoRecibe

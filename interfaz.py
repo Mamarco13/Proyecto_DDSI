@@ -23,6 +23,7 @@ def index():
 
 @app.route('/procesar_pedido', methods=['POST'])
 def procesar_pedido():
+    image_url = url_for('static', filename = 'logo.jpeg')
     if request.method == 'POST':
         direccion = request.form['direccion']
         tipo = request.form['tipo']
@@ -32,28 +33,32 @@ def procesar_pedido():
     conexion = conectar_base_de_datos()
     #Aqui codigo para procesar el pedido
     cerrar_conexion(conexion)
-    return render_template('index.html')
+    return render_template('index.html', image_url=image_url)
 
     
 @app.route('/mostrar_tabla', methods=['POST'])
 def mostrar_tabla():
+    image_url = url_for('static', filename = 'logo.jpeg')
     if request.method == 'POST':
         tabla_mostrar = request.form['tabla_mostrar']
 
     conexion = conectar_base_de_datos()
     #Aqui codigo para mostrar la tabla en pantalla.
     cerrar_conexion(conexion)
-    return render_template('index.html')
+    return render_template('index.html', image_url=image_url)
 
 @app.route('/caso1.html')
 def caso1():
-    return render_template('caso1.html')
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso1.html', image_url=image_url)
 @app.route('/caso2.html')
 def caso2():
-    return render_template('caso2.html')
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso2.html', image_url=image_url)
 @app.route('/caso3.html')
 def caso3():
-    return render_template('caso3.html')
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso3.html', image_url=image_url)
 
 if __name__ == '__main__':
     app.run(debug = True, port = 5000)

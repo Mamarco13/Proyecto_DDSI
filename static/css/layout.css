@@ -11,13 +11,32 @@ body {
 
 .botones {
     text-align: center;
-    margin-top: 20px; /* Ajusta según sea necesario para el espacio entre el título y los botones */
+    margin-top: 90px; /* Ajusta según sea necesario para el espacio entre el título y los botones */
 }
 button {
+    background-color: green;
+    min-width: 400px;
     display: block;
     margin: 0 auto;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 25px 0;
+    font-size: 20px;
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+h1 {
+    margin-top: 310px; /* Ajusta según sea necesario para la posición vertical del texto */
+    font-size: 50px;
+}
+
+.rectangulo{
+    background-color: peru; /* Color de fondo del rectángulo */
+    color: #000000; /* Color del texto dentro del rectángulo */
+    padding: 10px; /* Espaciado interno del rectángulo */
+    text-align: center;
+    width: 100%; /* Ancho del rectángulo al 100% del contenedor */
+    position: absolute; 
+    top: 0;
+    height: 180px;
+    font-size: 55px;
 }

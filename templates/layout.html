@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
 </head>
 <body>
+    <div class="rectangulo">
+        <p>Pizzeria Ave Phoenix</p>
+    </div>
+    <img src="{{image_url}}" alt="Logo" style="width: 200px; height: 900 px; position: absolute; top: 0; left: 0;">
+    <img src="{{image_url}}" alt="Logo" style="width: 200px; height: 900 px; position: absolute; top: 0; right: 0;">
     {%block body%}
     {%endblock%}
 </body>
