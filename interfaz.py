@@ -297,6 +297,21 @@ def caso6():
     image_url = url_for('static', filename = 'logo.jpeg')
     return render_template('caso6.html', image_url=image_url)
 
+@app.route('/caso10.html')
+def caso10():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso10.html', image_url=image_url)
+
+@app.route('/caso11.html')
+def caso11():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso11.html', image_url=image_url)
+
+@app.route('/caso12.html')
+def caso12():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso12.html', image_url=image_url)
+
 @app.route('/produccion.html')
 def Prod():
     image_url = url_for('static', filename = 'logo.jpeg')
