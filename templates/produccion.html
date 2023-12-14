@@ -1,0 +1,24 @@
+{% extends './layout.html' %}
+
+{%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
+
+{%block body%}
+<h1>Elija la acción a realizar</h1><br>
+<div class = "botones">
+    <button id = "boton1" onclick="caso1()"><b>Insertar una tupla</b></button><br>
+    <button id = "boton2" onclick="caso2()"><b>Eliminar una tupla</b></button><br>
+    <button id = "boton3" onclick="caso3()"><b>Mostrar tablas</b></button><br>
+</div>
+
+<script>
+    function caso1(){
+        window.location.href = 'caso1.html';
+    }
+    function caso2(){
+        window.location.href = 'caso2.html';
+    }
+    function caso3(){
+        window.location.href = 'caso3.html';
+    }
+</script>
+{%endblock%}

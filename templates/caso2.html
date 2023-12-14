@@ -5,12 +5,20 @@
 {%block body%}
 <h1>Nuevo pedido</h1>
 <form action="/procesar_pedido" method="post">
+    <label for="usuario">Nombre de usuario:</label>
+    <input type="text" id="usuario" name="usuario" required><br><br>
+
+    <label for="email">E-mail:</label>
+    <input type="text" id="email" name="email" required><br><br>
+
+    <label for="telefono">Telefono:</label>
+    <input type="text" id="telefono" name="telefono" required><br><br>
+
     <label for="Direccion">Direccion:</label>
     <input type="text" id="direccion" name = "direccion" required><br><br>
+
     <label for ="Dni">DNI del trabajador:</label>
     <input type="text" id="DNI" name = "DNI" required><br><br>
-    <label for ="ID">ID del pedido:</label>
-    <input type="id" id="id" name = "id" required><br><br>
 
     <label for="Tipo">Tipo:</label>
     <select id="tipo" name = "tipo" required>
@@ -23,8 +31,8 @@
         <option value="Marinera">Marinera</option>
     </select><br><br>
 
-    <label for="Hora">Hora de entrega:</label>
-        <input type="time" id="hora" name="hora" step="60" required><br><br>
+<label for="hora_recogida">Hora de recogida:</label>
+    <input type="datetime-local" id="hora_recogida" name="hora_recogida" required><br><br>
 
     <button type="submit">Enviar</button>
 

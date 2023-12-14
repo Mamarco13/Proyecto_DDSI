@@ -5,22 +5,28 @@
 {%block body%}
 <h1>Elija la acción a realizar</h1><br>
 
-<div class = "botones">
-    <button id = "boton1" onclick="caso1()"><b>Insertar/Eliminar una tupla</b></button><br>
-    <button id = "boton2" onclick="caso2()"><b>Nuevo pedido</b></button><br>
-    <button id = "boton3" onclick="caso3()"><b>Mostrar tablas</b></button><br>
+<div class = "Subsistemas">
+    <button id = "Marketing" onclick="Mark()"><b>Marketing</b></button><br>
+    <button id = "Produccion" onclick="Prod()"><b>Produccion</b></button><br>
+    <button id = "Contabilidad" onclick="Cont()"><b>Contabilidad</b></button><br>
+    <button id = "RRHH" onclick="RRHH()"><b>RRHH</b></button><br>
 </div>
 
 
+
 <script>
-    function caso1(){
-        window.location.href = 'caso1.html';
+    function Mark(){
+        window.location.href = 'marketing.html';
     }
-    function caso2(){
-        window.location.href = 'caso2.html';
+    function Prod(){
+        window.location.href = 'produccion.html';
     }
-    function caso3(){
-        window.location.href = 'caso3.html';
+    function Cont(){
+        window.location.href = 'contabilidad.html';
     }
+    function RRHH(){
+        window.location.href = 'RRHH.html';
+    }
+
 </script>
 {%endblock%}
