@@ -246,6 +246,21 @@ def caso3():
     image_url = url_for('static', filename = 'logo.jpeg')
     return render_template('caso3.html', image_url=image_url)
 
+@app.route('/caso4.html')
+def caso4():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso4.html', image_url=image_url)
+
+@app.route('/caso5.html')
+def caso5():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso5.html', image_url=image_url)
+
+@app.route('/caso6.html')
+def caso6():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso6.html', image_url=image_url)
+
 @app.route('/produccion.html')
 def Prod():
     image_url = url_for('static', filename = 'logo.jpeg')
