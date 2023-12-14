@@ -23,7 +23,7 @@ def index():
     return render_template('index.html', image_url=image_url)
 
 
-@app.route('/procesar_pedido', methods=['POST'])
+"""@app.route('/procesar_pedido', methods=['POST'])
 def procesar_pedido():
     try:
         image_url = url_for('static', filename='logo.jpeg')
@@ -64,8 +64,44 @@ def procesar_pedido():
         print(f"Error no manejado: {str(e)}")
         return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
 
-    return render_template('index.html', image_url=image_url)
+    return render_template('index.html', image_url=image_url)"""
 
+@app.route('/insertarPedido', methods=['POST'])
+def procesar_pedido():
+    try:
+        image_url = url_for('static', filename='logo.jpeg')
+
+        if request.method == 'POST':
+            direccion = request.form['direccion']
+            tipo = request.form['tipo']
+            idCliente = request.form['idCliente']
+            ID = request.form['id']
+            ingredientes = request.form['ingredientes']
+            
+            hora_recogida = request.form['hora_recogida']
+            hora_recogida = hora_recogida.replace('T', ' ')
+            hora_recogida += ':00'
+            hora_recogida = str(hora_recogida)
+
+            usuario = request.form['usuario']
+            email = request.form['email']
+            telefono = request.form['telefono']
+
+            idMovimiento = random.randint(0, 1000000)
+            
+            conexion = conectar_base_de_datos()
+
+            if conexion:
+                procesar_pedido_en_base_de_datos(conexion, idCliente, ID, usuario, email, telefono, idMovimiento, direccion, tipo, ingredientes, hora_recogida)
+
+            cerrar_conexion(conexion)
+            return render_template('index.html', image_url=image_url)
+                
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=image_url)
 
     
 @app.route('/mostrar_tabla', methods=['POST'])
