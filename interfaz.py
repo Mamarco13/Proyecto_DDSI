@@ -75,7 +75,7 @@ def procesar_pedido():
             direccion = request.form['direccion']
             tipo = request.form['tipo']
             idCliente = request.form['idCliente']
-            ID = request.form['id']
+            idPedido = request.form['idPedido']
             ingredientes = request.form['ingredientes']
             
             hora_recogida = request.form['hora_recogida']
@@ -87,12 +87,16 @@ def procesar_pedido():
             email = request.form['email']
             telefono = request.form['telefono']
 
-            idMovimiento = random.randint(0, 1000000)
+            idMovimiento = request.form['idMovimiento']
+
+            nombreCliente = request.form['nombreCliente']
+            apellidosCliente = request.form['apellidosCliente']
+            vip = request.form['vip']
             
             conexion = conectar_base_de_datos()
 
             if conexion:
-                procesar_pedido_en_base_de_datos(conexion, idCliente, ID, usuario, email, telefono, idMovimiento, direccion, tipo, ingredientes, hora_recogida)
+                procesar_pedido_en_base_de_datos(conexion, idCliente, idPedido, usuario, email, telefono, idMovimiento, direccion, tipo, ingredientes, hora_recogida, nombreCliente, apellidosCliente, vip)
 
             cerrar_conexion(conexion)
             return render_template('index.html', image_url=image_url)
@@ -143,22 +147,22 @@ def obtener_datos_tabla(conexion, nombre_tabla):
         if cursor:
             cursor.close()
             
-def procesar_pedido_en_base_de_datos(conexion, idCliente, id_pedido, usuario, email, telefono, idMovimiento, direccion, tipo_pedido, ingredientes, hora_recogida):
+def procesar_pedido_en_base_de_datos(conexion, idCliente, id_pedido, usuario, email, telefono, idMovimiento, direccion, tipo_pedido, ingredientes, hora_recogida, nombre, apellidos, vip):
     try:
         
         conexion = conectar_base_de_datos()
         cursor = conexion.cursor()
 
         sentencia1 = """INSERT INTO ClienteRealizaPedido 
-                 (idCliente, idPedido, usuario, email, telefono, direccion, tipoPedido, ingredientes, horaRecogida) 
+                 (idCliente, idPedido, usuario, email, telefono, direccion, tipoPedido, ingredientes, horaRecogida, nombre, apellidos, vip) 
                  VALUES (' """ + idCliente +""" ', ' """ + id_pedido +""" ', ' """ + usuario +""" ', ' """ + email +""" ', ' """ + telefono +""" ', ' """ + direccion +""" ', ' """+ tipo_pedido +""" ', ' """+ ingredientes +""" ',
-                 TO_TIMESTAMP(' """ +hora_recogida + """ ', 'YYYY-MM-DD HH24:MI:SS'))"""
+                 TO_TIMESTAMP(' """ +hora_recogida + """ ', 'YYYY-MM-DD HH24:MI:SS'), ' """ + nombre + """ ' , ' """ + apellidos + """ ', ' """ + vip + """ ' )"""
 
         cursor.execute(sentencia1)
 
         senetncia2 = """INSERT INTO ProduceVenta 
-                 (idPedido,idCliente, idMovimiento,direccion, tipoPizza) 
-                 VALUES (' """ + id_pedido +""" ', ' """ + idCliente +""" ', ' """ + str(idMovimiento) + """ ', ' """+ direccion +""" ', ' """ + tipo_pedido +""" ')"""
+                 (idPedido,idCliente, idMovimiento,direccion, tipoPizza, nombre, clienteVIP) 
+                 VALUES (' """ + id_pedido +""" ', ' """ + idCliente +""" ', ' """ + idMovimiento + """ ', ' """+ direccion +""" ', ' """ + tipo_pedido + """ ', ' """ + nombre + """ ', ' """ + vip + """ ')"""
 
         cursor.execute(senetncia2)
 
