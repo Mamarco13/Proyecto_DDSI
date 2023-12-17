@@ -103,7 +103,38 @@ def procesar_pedido():
 
     return render_template('index.html', image_url=image_url)
 
-    
+@app.route('/insertarSueldo', methods=['POST'])
+def procesar_sueldo():
+    try:
+        image_url = url_for('static', filename='logo.jpeg')
+
+        if request.method == 'POST':
+            dni = request.form['dni']
+            idSueldo = request.form['idSueldo']
+            iban = request.form['iban']
+            cantidad = request.form['cantidad']
+            fecha = request.form['fecha']
+            nombre = request.form['nombre']
+            apellidos = request.form['apellidos']
+            sueldo = request.form['sueldo']
+            edad = request.form['edad']
+            puesto = request.form['puesto']
+
+            conexion = conectar_base_de_datos()
+
+        if conexion:
+            procesarSueldo(conexion, dni, idSueldo, iban, cantidad, fecha, nombre, apellidos, sueldo, edad, puesto)
+            
+        cerrar_conexion(conexion)
+        return render_template('index.html', image_url=image_url)
+                
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=image_url)
+
+       
 @app.route('/mostrar_tabla', methods=['POST'])
 def mostrar_tabla():
     image_url = url_for('static', filename = 'logo.jpeg')

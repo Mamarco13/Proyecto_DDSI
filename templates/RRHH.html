@@ -5,6 +5,12 @@
 {%block body%}
 <h1>Elija la acción a realizar</h1><br>
 <div class = "botones">
+    <label for="Tabla">Selecionar tabla:</label>
+    <select id="Tabla" name = "Tabla" required>
+        <option value="" disabled selected>Seleccione la tabla</option>
+        <option value="RecibeSueldo">RecibeSueldo</option>
+        <option value="EmpleadoRecibe">EmpleadoRecibe</option>
+    </select><br><br>
     <button id = "boton1" onclick="caso4()"><b>Insertar una tupla</b></button><br>
     <button id = "boton2" onclick="caso5()"><b>Eliminar una tupla</b></button><br>
     <button id = "boton3" onclick="caso6()"><b>Mostrar tablas</b></button><br>

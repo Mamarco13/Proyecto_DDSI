@@ -1,13 +1,41 @@
 {% extends './layout.html' %}
 
-{%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
+{% block title %} {{"Pizzeria Ave Phoenix"}} {% endblock %}
 
-{%block body%}
-<h1>Insercion/Borrado de tuplas</h1>Borrado
-<button id = "Vuelta" onclick="volver()">Volver</button>
-<script>
-    function volver(){
-        window.location.href = 'http://127.0.0.1:5000';
-    }
-</script>
-{%endblock%}
+{% block body %}
+<h1>Inserción de sueldo</h1>
+<form action="/insertarSueldo" method="post">
+    <label for="dni">DNI del trabajador:</label>
+    <input type="text" id="dni" name="dni" required><br><br>
+
+    <label for="idSueldo">ID de Sueldo:</label>
+    <input type="text" id="idSueldo" name="idSueldo" required><br><br>
+
+    <label for="iban">IBAN:</label>
+    <input type="text" id="iban" name="iban" required><br><br>
+
+    <label for="cantidad">Cantidad:</label>
+    <input type="text" id="cantidad" name="cantidad" required><br><br>
+
+    <label for="fecha">Fecha:</label>
+    <input type="datetime-local" id="fecha" name="fecha" required><br><br>
+
+    <label for="nombre">Nombre del empleado:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+
+    <label for="apellidos">Apellidos del empleado:</label>
+    <input type="text" id="apellidos" name="apellidos" required><br><br>
+
+    <label for="sueldo">Sueldo:</label>
+    <input type="text" id="sueldo" name="sueldo" required><br><br>
+
+    <label for="edad">Edad del empleado:</label>
+    <input type="text" id="edad" name="edad" required><br><br>
+
+    <label for="puesto">Puesto del empleado:</label>
+    <input type="text" id="puesto" name="puesto" required><br><br>
+
+    <button type="submit">Enviar</button>
+
+</form>
+{% endblock %}
