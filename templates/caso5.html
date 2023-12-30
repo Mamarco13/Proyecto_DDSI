@@ -1,0 +1,13 @@
+{% extends './layout.html' %}
+
+{% block title %} {{"Pizzeria Ave Phoenix - Eliminación de Sueldo"}} {% endblock %}
+
+{% block body %}
+    <h1>Eliminación de sueldo</h1>
+    <form action="/eliminarSueldo" method="post">
+        <label for="idSueldo">ID de Sueldo a eliminar:</label>
+        <input type="text" id="idSueldo" name="idSueldo" required><br><br>
+
+        <button type="submit">Eliminar</button>
+    </form>
+{% endblock %}

@@ -117,7 +117,12 @@ def procesar_sueldo():
             idSueldo = request.form['idSueldo']
             iban = request.form['iban']
             cantidad = request.form['cantidad']
+            
             fecha = request.form['fecha']
+            fecha = fecha.replace('T', ' ')
+            fecha += ':00'
+            fecha = str(fecha)
+
             nombre = request.form['nombre']
             apellidos = request.form['apellidos']
             sueldo = request.form['sueldo']
@@ -127,7 +132,7 @@ def procesar_sueldo():
             conexion = conectar_base_de_datos()
 
         if conexion:
-            procesarSueldo(conexion, dni, idSueldo, iban, cantidad, fecha, nombre, apellidos, sueldo, edad, puesto)
+            procesar_sueldo(conexion, dni, idSueldo, iban, cantidad, fecha, nombre, apellidos, sueldo, edad, puesto)
             
         cerrar_conexion(conexion)
         return render_template('index.html', image_url=image_url)
@@ -253,6 +258,57 @@ def procesar_sueldo(conexion, dni, idSueldo, iban, cantidad, fecha, nombre, apel
     finally:
         if cursor:
             cursor.close()
+
+
+@app.route('/eliminarSueldo', methods=['POST'])
+def eliminar_sueldo_route():
+    try:
+        if request.method == 'POST':
+            idSueldo = request.form['idSueldo']
+
+            conexion = conectar_base_de_datos()
+
+            if conexion:
+                eliminar_sueldo(conexion, idSueldo)
+
+            cerrar_conexion(conexion)
+            return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+def eliminar_sueldo(conexion, idSueldo):
+    try:
+        conexion = conectar_base_de_datos()
+        cursor = conexion.cursor()
+
+        # Eliminar de la tabla RecibeSueldo
+        sentencia1 = """DELETE FROM RecibeSueldo WHERE IDSUELDO = '""" + idSueldo + """'"""
+        cursor.execute(sentencia1)
+
+        # Eliminar de la tabla EmpleadoRecibe
+        sentencia2 = """DELETE FROM EmpleadoRecibe WHERE idSueldo = '""" + idSueldo + """'"""
+        cursor.execute(sentencia2)
+
+        # Eliminar de la tabla EsUnGasto
+        sentencia3 = """DELETE FROM EsUnGasto WHERE idSueldo = '""" + idSueldo + """'"""
+        cursor.execute(sentencia3)
+
+        conexion.commit()
+        print(f"Sueldo con idSueldo {idSueldo} eliminado correctamente")
+        print("Consulta SQL:", cursor.statement)
+
+    except Exception as error:
+        print(f"Error al eliminar el sueldo de la base de datos: {error}")
+        conexion.rollback()
+
+    finally:
+        if cursor:
+            cursor.close()
+
 
 def procesar_proveedor(conexion, idProveedor, dineroGastado, nombre, productos):
     try:
