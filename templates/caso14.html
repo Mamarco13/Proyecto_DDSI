@@ -1,0 +1,13 @@
+{% extends './layout.html' %}
+
+{%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
+
+{%block body%}
+<h1>Eliminar tupla</h1><br><br>
+<h2>ProovedorProvoca</h2>
+<form action="/Elim2" method="post">
+    <label for="IdProovedor">IdProovedor:</label>
+    <input type="text" id="IdProovedor" name="IdProovedor" required><br>
+    <button type="submit">Enviar</button>
+</form>
+{%endblock%}

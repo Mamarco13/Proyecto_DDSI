@@ -5,7 +5,6 @@
 
 <h1>Insercion de tuplas</h1><br><br>
 <h2>EsUnGasto</h2>
-<div class="form-container">
     <form action="/es-un-Gasto" method="post">
         <!--IDSueldo, idMovimiento(CP), DineroGastado, CantidadProducto, Frecuencia-->
         <label for="gastado">Dinero gastado:</label>
@@ -20,6 +19,7 @@
             <option value="Mensual">Mensual</option><br>
             <option value="Bienal">Bienal</option><br>
             <option value="Anual">Anual</option><br>
+        </select>
         <button type="submit">Enviar</button>
     </form>
 {%endblock%}

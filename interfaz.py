@@ -403,6 +403,21 @@ def caso12():
     image_url = url_for('static', filename = 'logo.jpeg')
     return render_template('caso12.html', image_url=image_url)
 
+@app.route('/caso13.html')
+def caso13():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso13.html', image_url=image_url)
+
+@app.route('/caso14.html')
+def caso14():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso14.html', image_url=image_url)
+
+@app.route('/caso15.html')
+def caso15():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso15.html', image_url=image_url)
+
 @app.route('/produccion.html')
 def Prod():
     image_url = url_for('static', filename = 'logo.jpeg')
