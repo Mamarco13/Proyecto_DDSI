@@ -50,7 +50,6 @@ cursorInsertar.execute(consulta)
 
 #CrearPromocion
 consulta = """CREATE TABLE CreaPromocion (
-    DNI VARCHAR2(9),
     idPromocion NUMBER,
     Tipo VARCHAR2(20),
     Productos VARCHAR2(500),
