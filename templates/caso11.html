@@ -1,46 +1,18 @@
 {% extends './layout.html' %}
 
 {%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
-
 {%block body%}
-<h1>Nuevo pedido</h1>
-<form action="/procesar_pedido" method="post">
-    <label for="usuario">Nombre de usuario:</label>
-    <input type="text" id="usuario" name="usuario" required><br><br>
 
-    <label for="email">E-mail:</label>
-    <input type="text" id="email" name="email" required><br><br>
-
-    <label for="telefono">Telefono:</label>
-    <input type="text" id="telefono" name="telefono" required><br><br>
-
-    <label for="Direccion">Direccion:</label>
-    <input type="text" id="direccion" name = "direccion" required><br><br>
-
-    <label for ="Dni">DNI del trabajador:</label>
-    <input type="text" id="DNI" name = "DNI" required><br><br>
-
-    <label for="Tipo">Tipo:</label>
-    <select id="tipo" name = "tipo" required>
-        <option value="" disabled selected>Seleccione el tipo de pizza</option>
-        <option value="Margharita">Margharita</option>
-        <option value="Prosciutto">Prosciutto</option>
-        <option value="Pepperoni">Pepperoni</option>
-        <option value="Rucula">Rucula</option>
-        <option value="Hawaiana">Hawaiana</option>
-        <option value="Marinera">Marinera</option>
-    </select><br><br>
-
-<label for="hora_recogida">Hora de recogida:</label>
-    <input type="datetime-local" id="hora_recogida" name="hora_recogida" required><br><br>
-
-    <button type="submit">Enviar</button>
-
-</form>
-<button id = "Vuelta" onclick="volver()">Volver</button>
-<script>
-    function volver(){
-        window.location.href = 'http://127.0.0.1:5000';
-    }
-</script>
+<h1>Insercion de tuplas</h1><br><br>
+<h2>ProovedorProvoca</h2>
+    <form action="/proovedor-provoca" method="post" >
+        <!--idProveedor, DineroGastado(CP), Nombre, Productos-->
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="productos">Productos: </label>
+        <input type="text" id="Productos" name="Productos" required><br>
+        <label for="gasto">Dinero gastado: </label>
+        <input type="text" id="Dinero" name="Dinero" required><br>
+        <button type="submit">Enviar</button>
+    </form>
 {%endblock%}

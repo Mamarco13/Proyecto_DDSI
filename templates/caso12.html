@@ -1,22 +1,20 @@
 {% extends './layout.html' %}
 
 {%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
-
 {%block body%}
-<h1>Mostrar tablas</h1>
-<form action="/mostrar_tabla" method="post">
-    <select id="tabla_mostrar" name = "tabla_mostrar" required>
-        <option value="" disabled selected>Seleccione la tabla a mostrar</option>
-        <option value="ProduceVenta">ProduceVenta</option>
-        <option value="EsUnGasto">EsUnGasto</option>
-        <option value="ProveedorProvoca">ProveedorProvoca</option>
-    </select><br><br>
-    <button type="submit">Mostrar</button>
-</form>
-<button id = "Vuelta" onclick="volver()">Volver</button>
-<script>
-    function volver(){
-        window.location.href = 'http://127.0.0.1:5000';
-    }
-</script>
+
+<h1>Insercion de tuplas</h1><br><br>
+<h2>RecibeSueldo</h2>
+    <form action="/recibe-sueldo" method="post">
+        <!--DNI, IDSUELDO (CP), IBAN, cantidad, fecha-->
+        <label for="dni">DNI Trabajador: </label>
+        <input type="text" name="DNI_Trab" id="DNI_Trab"><br>
+        <label for="iban">IBAN: </label>
+        <input type="text" name="IBAN" id="IBAN"><br>
+        <label for="salario">Salario: </label>
+        <input type="text" name="Salario" id="Salario"><br><br>
+        <label for="fecha-pago">Fecha pago: </label>
+        <input type="date" name="fecha-pago" id="fecha-pago"><br>
+        <button type="submit">Enviar</button>
+    </form>
 {%endblock%}
