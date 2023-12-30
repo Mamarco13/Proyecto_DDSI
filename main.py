@@ -50,13 +50,12 @@ cursorInsertar.execute(consulta)
 
 #CrearPromocion
 consulta = """CREATE TABLE CreaPromocion (
-    idPromocion NUMBER,
+    idPromocion NUMBER PRIMARY KEY,
     Tipo VARCHAR2(20),
     Productos VARCHAR2(500),
     Nombre VARCHAR2(20),
     F_ini TIMESTAMP,
-    F_fin TIMESTAMP,
-    PRIMARY KEY(DNI,idPromocion)) """
+    F_fin TIMESTAMP """
 
 cursorInsertar.execute(consulta)
 

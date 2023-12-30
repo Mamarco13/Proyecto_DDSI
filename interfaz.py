@@ -3,7 +3,7 @@ import oracledb
 from datetime import datetime
 import random
 
-vector_id_sueldo[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+# vector_id_sueldo[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 def asignarIDSueldo():
     for i in vector_id_sueldo.len():
         if vector_id_sueldo[i] == 0:
@@ -114,7 +114,7 @@ def procesar_pedido():
 
     return render_template('index.html', image_url=image_url)
 
-@app.route('/insertarSueldo', methods=['POST'])
+"""@app.route('/insertarSueldo', methods=['POST'])
 def procesar_sueldo():
     try:
         image_url = url_for('static', filename='logo.jpeg')
@@ -148,7 +148,7 @@ def procesar_sueldo():
         print(f"Error no manejado: {str(e)}")
         return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
 
-    return render_template('index.html', image_url=image_url)
+    return render_template('index.html', image_url=image_url)"""
 
 @app.route('/es-un-Gasto', methods=['POST'])
 def procesar_sueldo():
@@ -444,6 +444,21 @@ def caso6():
     image_url = url_for('static', filename = 'logo.jpeg')
     return render_template('caso6.html', image_url=image_url)
 
+@app.route('/caso7.html')
+def caso7():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso7.html', image_url=image_url)
+
+@app.route('/caso8.html')
+def caso8():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso8.html', image_url=image_url)
+
+@app.route('/caso9.html')
+def caso9():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso9.html', image_url=image_url)
+
 @app.route('/caso10.html')
 def caso10():
     image_url = url_for('static', filename = 'logo.jpeg')
@@ -473,6 +488,21 @@ def caso14():
 def caso15():
     image_url = url_for('static', filename = 'logo.jpeg')
     return render_template('caso15.html', image_url=image_url)
+
+@app.route('/caso19.html')
+def caso19():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso19.html', image_url=image_url)
+
+@app.route('/caso20.html')
+def caso20():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso20.html', image_url=image_url)
+
+@app.route('/caso21.html')
+def caso21():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso21.html', image_url=image_url)
 
 @app.route('/produccion.html')
 def Prod():

@@ -1,1 +1,14 @@
-<!-- Caso 8: Eliminar tuplas CrearPromoción - Marketing -->
+<!-- Caso 8: Eliminar tuplas CrearPromoción - Marketing --> 
+{% extends './layout.html' %}
+
+{%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
+
+{%block body%}
+<h1>Eliminar tupla</h1><br><br>
+<h2>CrearPromoción</h2>
+<form action="/EliminaC8" method="post">
+    <label for="idPromoción">IDPromoción:</label>
+    <input type="text" id="IdSueldo" name="IdSueldo" required><br>
+    <button type="submit">Enviar</button>
+</form>
+{%endblock%}

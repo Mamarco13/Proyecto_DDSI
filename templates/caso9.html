@@ -3,30 +3,21 @@
 {% extends './layout.html' %}
 
 {%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
+
 {%block body%}
-
-<h1>Insercion de tuplas</h1><br><br>
-<h2>CrearPromoción</h2>
-    <form action="/recibe-sueldo" method="post">
-        <!--Código (CP), Tipo, Productos, Nombre, Fecha_inicio, Fecha_fin-->
-        <label for="codigo">Código: </label>
-        <input type="text" name="Código" id="Código"><br>
-
-        <label for="nombre">Nombre: </label>
-        <input type="text" name="Nombre" id="Nombre"><br><br>
-        
-        <label for="tipo">Tipo: </label>
-        <input type="text" name="Tipo" id="Tipo"><br><br>
-        
-        <label for="productos">Productos: </label>
-        <input type="text" name="Productos" id="Productos"><br><br>    
-
-        <label for="fecha-inicio">Fecha inicio: </label>
-        <input type="date" name="fecha-inicio" id="fecha-inicio"><br>
-
-        <label for="fecha-inicio">Fecha fin: </label>
-        <input type="date" name="fecha-fin" id="fecha-fin"><br>
-
-        <button type="submit">Enviar</button>
-    </form>
+<h1>Mostrar tablas</h1>
+<form action="/mostrar_tabla" method="post">
+    <select id="tabla_mostrar" name = "tabla_mostrar" required>
+        <option value="" disabled selected>Seleccione la tabla a mostrar</option>
+        <option value="CrearPromoción">CrearPromoción</option>
+        <option value="ClienteRealizaPedido">ClienteRealizaPedido</option>
+    </select><br><br>
+    <button type="submit">Mostrar</button>
+</form>
+<button id = "Vuelta" onclick="volver()">Volver</button>
+<script>
+    function volver(){
+        window.location.href = 'http://127.0.0.1:5000';
+    }
+</script>
 {%endblock%}
