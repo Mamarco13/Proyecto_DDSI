@@ -3,6 +3,13 @@ import oracledb
 from datetime import datetime
 import random
 
+vector_id_sueldo[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+def asignarIDSueldo():
+    for i in vector_id_sueldo.len():
+        if vector_id_sueldo[i] == 0:
+            vector_id_sueldo[i] = 1
+            return i
+
 app = Flask(__name__)
 def conectar_base_de_datos():
     try:
@@ -143,6 +150,30 @@ def procesar_sueldo():
 
     return render_template('index.html', image_url=image_url)
 
+@app.route('/es-un-Gasto', methods=['POST'])
+def procesar_sueldo():
+    try:
+        image_url = url_for('static', filename='logo.jpeg')
+
+        if request.method == 'POST':
+            DineroGastado = request.form['Din_Gastado']
+            CantidadProducto = request.form['Cantidad_Prod']
+            Frecuencia = request.form['Frecuencia']
+            idSueldo = asignarIDSueldo()
+            conexion = conectar_base_de_datos()
+
+        if conexion:
+            procesar_gasto(conexion, idSueldo, DineroGastado, CantidadProducto, Frecuencia)
+            
+        cerrar_conexion(conexion)
+        return render_template('index.html', image_url=image_url)
+                
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=image_url)
+
        
 @app.route('/mostrar_tabla', methods=['POST'])
 def mostrar_tabla():
@@ -240,6 +271,31 @@ def procesar_sueldo(conexion, dni, idSueldo, iban, cantidad, fecha, nombre, apel
                  VALUES (' """ + dni +""" ', ' """ + idSueldo +""" ', ' """ + nombre +""" ', ' """ + apellidos +""" ', ' """+ sueldo+""" ', ' """+edad+""" ', ' """+puesto+""" ')"""
 
         cursor.execute(sentencia2)
+
+        sentencia3 = """INSERT INTO EsUnGasto 
+                 (idSueldo, DNI, Gasto) 
+                 VALUES (' """ + idSueldo +""" ', ' """ + dni +""" ', ' """ + cantidad + """ ')"""
+            
+        cursor.execute(sentencia3)
+
+        conexion.commit()
+        print("Datos procesados correctamente")
+        print("Consulta SQL:", cursor.statement)
+
+    except Exception as error:
+        print(f"Error al procesar los datos en la base de datos: {error}")
+        conexion.rollback()
+
+    finally:
+        if cursor:
+            cursor.close()
+
+
+def procesar_gasto(conexion, DineroGastado, CantidadProducto, Frecuencia):
+    try:
+
+        conexion = conectar_base_de_datos()
+        cursor = conexion.cursor()
 
         sentencia3 = """INSERT INTO EsUnGasto 
                  (idSueldo, DNI, Gasto) 
@@ -402,6 +458,21 @@ def caso11():
 def caso12():
     image_url = url_for('static', filename = 'logo.jpeg')
     return render_template('caso12.html', image_url=image_url)
+
+@app.route('/caso13.html')
+def caso13():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso13.html', image_url=image_url)
+
+@app.route('/caso14.html')
+def caso14():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso14.html', image_url=image_url)
+
+@app.route('/caso15.html')
+def caso15():
+    image_url = url_for('static', filename = 'logo.jpeg')
+    return render_template('caso15.html', image_url=image_url)
 
 @app.route('/produccion.html')
 def Prod():
