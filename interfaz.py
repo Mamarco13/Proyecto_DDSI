@@ -58,7 +58,7 @@ def procesar_pedido():
                 procesar_pedido_en_base_de_datos(conexion, idCliente, ID, usuario, email, telefono, idMovimiento, direccion, tipo, ingredientes, hora_recogida)
 
             cerrar_conexion(conexion)
-            return render_template('index.html', image_url=image_url)
+            return render_template('index.html', image_url=image_url)git
                 
     except Exception as e:
         print(f"Error no manejado: {str(e)}")
