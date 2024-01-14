@@ -388,6 +388,7 @@ def procesar_proveedor(conexion, idProveedor, dineroGastado, nombre, productos):
     finally:
         if cursor:
             cursor.close()
+#MARKETING 
 
 def procesar_promocion(conexion, DNI, idPromocion, tipo, productos, nombre, F_INI, F_FIN):
     try:
@@ -412,6 +413,10 @@ def procesar_promocion(conexion, DNI, idPromocion, tipo, productos, nombre, F_IN
     finally:
         if cursor:
             cursor.close()
+
+
+
+# FIN MARKETING
 
 
 @app.route('/caso1.html')

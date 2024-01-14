@@ -6,9 +6,14 @@
 
 {%block body%}
 <h1>Mostrar tablas</h1>
-
-
-<!-- Quiero que aquí vaya la tabla mostrada, no un mostrar -->
+<form action="/mostrar_tabla" method="post">
+    <select id="tabla_mostrar" name = "tabla_mostrar" required>
+        <option value="" disabled selected>Seleccione la tabla a mostrar</option>
+        <option value="CrearPromoción">CrearPromoción</option>
+        <option value="ClienteRealizaPedido">ClienteRealizaPedido</option>
+    </select><br><br>
+    <button type="submit">Mostrar</button>
+</form>
 
 <button id = "Vuelta" onclick="volver()">Volver</button>
 <script>
