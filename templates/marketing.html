@@ -5,20 +5,66 @@
 {%block body%}
 <h1>Elija la acción a realizar</h1><br>
 <div class = "botones">
-    <button id = "boton1" onclick="caso1()"><b>Insertar una tupla</b></button><br>
-    <button id = "boton2" onclick="caso2()"><b>Eliminar una tupla</b></button><br>
-    <button id = "boton3" onclick="caso3()"><b>Mostrar tablas</b></button><br>
+    <label for="Tabla">Selecionar tabla:</label>
+
+    <select id="Tabla" name = "Tabla" required>
+        <option value="" disabled selected>Seleccione la tabla</option>
+        <option value="CreaPromocion">CreaPromocion</option>
+        <option value="ClienteRealizaPedido">ClienteRealizaPedido</option>
+    </select><br><br>
+
+    <button id = "boton7" onclick="Insertar()"><b>Insertar una tupla</b></button><br>
+    <button id = "boton8" onclick="Eliminar()"><b>Eliminar una tupla</b></button><br>
+    <button id = "boton9" onclick="Mostrar()"><b>Mostrar tablas</b></button><br>
 </div>
 
 <script>
-    function caso1(){
-        window.location.href = 'caso2.html';
+    function Insertar(){
+        var tablaSeleccionada = document.getElementById('Tabla').value;
+
+        switch (tablaSeleccionada) {
+            case 'CreaPromocion':
+                window.location.href = 'caso7.html';
+                break;
+            case 'ClienteRealizaPedido':
+                window.location.href = 'caso1.html';
+                break;
+            default:
+                console.error('Tabla no reconocida');
+                return;
+        }
     }
-    function caso2(){
-        window.location.href = 'caso1.html';
+
+    function Eliminar(){
+        var tablaSeleccionada = document.getElementById('Tabla').value;
+
+        switch (tablaSeleccionada) {
+            case 'CreaPromocion':
+                window.location.href = 'caso8.html';
+                break;
+            case 'ClienteRealizaPedido':
+                window.location.href = 'caso20.html';
+                break;
+            default:
+                console.error('Tabla no reconocida');
+                return;
+        }
     }
-    function caso3(){
-        window.location.href = 'caso3.html';
+
+    function Mostrar(){
+                var tablaSeleccionada = document.getElementById('Tabla').value;
+
+        switch (tablaSeleccionada) {
+            case 'CreaPromocion':
+                window.location.href = 'caso9.html';
+                break;
+            case 'ClienteRealizaPedido':
+                window.location.href = 'caso21.html';
+                break;
+            default:
+                console.error('Tabla no reconocida');
+                return;
+        }
     }
 </script>
 {%endblock%}

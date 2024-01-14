@@ -1,0 +1,16 @@
+<!-- Caso 20: Eliminar tuplas ClienteRealizaPedido - Marketing -->
+
+{% extends './layout.html' %}
+
+{%block title%} {{"Pizzeria Ave Phoenix"}} {%endblock%}
+
+{%block body%}
+<h1>Eliminar tupla</h1><br><br>
+<h2>ClienteRealizaPedido</h2>
+<form action="/EliminaC20" method="post">
+    <label for="idCliente">idCliente:</label>
+    <input type="text" id="idCliente" name="idCliente" required><br>
+
+    <button type="submit">Enviar</button>
+</form>
+{%endblock%}
