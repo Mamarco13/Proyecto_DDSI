@@ -227,11 +227,11 @@ def procesar_pedido_en_base_de_datos(conexion, idCliente, id_pedido, usuario, em
 
         cursor.execute(sentencia1)
 
-        senetncia2 = """INSERT INTO ProduceVenta 
+        sentencia2 = """INSERT INTO ProduceVenta 
                  (idPedido,idCliente, idMovimiento,direccion, tipoPizza, nombre, clienteVIP) 
                  VALUES (' """ + id_pedido +""" ', ' """ + idCliente +""" ', ' """ + idMovimiento + """ ', ' """+ direccion +""" ', ' """ + tipo_pedido + """ ', ' """ + nombre + """ ', ' """ + vip + """ ')"""
 
-        cursor.execute(senetncia2)
+        cursor.execute(sentencia2)
 
         sentencia3 = """INSERT INTO GestionaPedido 
                  (idCliente, idPedido, tipoPedido, ingredientes, horaRecogida) 
@@ -342,15 +342,15 @@ def eliminar_sueldo(conexion, idSueldo):
         cursor = conexion.cursor()
 
         # Eliminar de la tabla RecibeSueldo
-        sentencia1 = """DELETE FROM RecibeSueldo WHERE IDSUELDO = '""" + idSueldo + """'"""
+        sentencia1 = """DELETE FROM RecibeSueldo WHERE TRIM(IDSUELDO) = '""" + idSueldo + """'"""
         cursor.execute(sentencia1)
 
         # Eliminar de la tabla EmpleadoRecibe
-        sentencia2 = """DELETE FROM EmpleadoRecibe WHERE idSueldo = '""" + idSueldo + """'"""
+        sentencia2 = """DELETE FROM EmpleadoRecibe WHERE TRIM(IDSUELDO) = '""" + idSueldo + """'"""
         cursor.execute(sentencia2)
 
         # Eliminar de la tabla EsUnGasto
-        sentencia3 = """DELETE FROM EsUnGasto WHERE idSueldo = '""" + idSueldo + """'"""
+        sentencia3 = """DELETE FROM EsUnGasto WHERE TRIM(IDSUELDO) = '""" + idSueldo + """'"""
         cursor.execute(sentencia3)
 
         conexion.commit()
@@ -371,11 +371,11 @@ def procesar_proveedor(conexion, idProveedor, dineroGastado, nombre, productos):
         conexion = conectar_base_de_datos()
         cursor = conexion.cursor()
         
-        sentencia1 = """INSERT INTO CreaPromocion 
-                 (idPromocion, Tipo, Productos, Nombre, F_ini, F_fin) 
-                 VALUES (:idPromocion, :tipo, :productos, :nombre, TO_TIMESTAMP(:F_INI, 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP(:F_FIN, 'YYYY-MM-DD HH24:MI:SS'))"""
+        sentencia1 = """INSERT INTO ProveedorProvoca 
+                 (idProveedor, dineroGastado, nombre, productos) 
+                 VALUES (:idProveedor, :dineroGastado, :nombre, :productos)"""
 
-        cursor.execute(sentencia1, {'idPromocion': idPromocion, 'tipo': tipo, 'productos': productos, 'nombre': nombre, 'F_INI': F_INI, 'F_FIN': F_FIN})
+        cursor.execute(sentencia1, {'idProveedor': idProveedor, 'dineroGastado': dineroGastado, 'nombre': nombre, 'productos': productos})
 
         conexion.commit()
         print("Datos procesados correctamente")
@@ -515,15 +515,14 @@ def eliminar_cliente(conexion, idCliente):
     try:
         cursor = conexion.cursor()
 
-        sentencia1 = """DELETE FROM GestionaPedido WHERE idCliente = '""" + idCliente + """'"""
+        sentencia1 = """DELETE FROM GestionaPedido WHERE TRIM(idCliente) = '""" + idCliente + """'"""
         cursor.execute(sentencia1)
 
-        sentencia2 = """DELETE FROM ProduceVenta WHERE idCliente = '""" + idCliente + """'"""
+        sentencia2 = """DELETE FROM ProduceVenta WHERE TRIM(idCliente) = '""" + idCliente + """'"""
         cursor.execute(sentencia2)
         
-        sentencia3 = """DELETE FROM ClienteRealizaPedido WHERE idCliente = '""" + idCliente + """'"""
+        sentencia3 = """DELETE FROM ClienteRealizaPedido WHERE TRIM(idCliente) = '""" + idCliente + """'"""
         cursor.execute(sentencia3)
-
 
 
         conexion.commit()
@@ -539,6 +538,102 @@ def eliminar_cliente(conexion, idCliente):
             cursor.close()
 
 # FIN MARKETING
+
+# PARA ELIMINAR
+# ELIMINAR PROVEEDOR
+@app.route('/elimina-proveedor', methods=['POST'])
+def eliminar_proveedor_route():
+    try:
+        if request.method == 'POST':
+            idProveedor = request.form['idProveedor']
+
+            conexion = conectar_base_de_datos()
+
+            if conexion:
+                eliminar_proveedor(conexion, idProveedor)
+
+            cerrar_conexion(conexion)
+            return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+
+def eliminar_proveedor(conexion, idProveedor):
+    try:
+        conexion = conectar_base_de_datos()
+        cursor = conexion.cursor()
+
+        sentencia1 = """DELETE FROM CreaPromocion WHERE idProveedor = '""" + idProveedor + """'"""
+        cursor.execute(sentencia1)
+
+        conexion.commit()
+        print(f"Promoción con idProveedor {idProveedor} eliminada correctamente")
+        print("Consulta SQL:", cursor.statement)
+
+    except Exception as error:
+        print(f"Error al eliminar al proveedor de la base de datos: {error}")
+        conexion.rollback()
+
+    finally:
+        if cursor:
+            cursor.close()
+
+# ELIMINAR PEDIDO 
+@app.route('/elimina-pedido', methods=['POST'])
+def eliminar_pedido_route():
+    try:
+        if request.method == 'POST':
+            idPedido = request.form['idPedido']
+            print(f"ID pedido recibido: {idPedido}")
+
+
+            conexion = conectar_base_de_datos()
+
+            if conexion:
+                eliminar_pedido(conexion, idPedido)
+
+            cerrar_conexion(conexion)
+            return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+
+def eliminar_pedido(conexion, idPedido):
+    try:
+        cursor = conexion.cursor()
+
+        sentencia1 = """DELETE FROM GestionaPedido WHERE TRIM(idPedido) = '""" + idPedido + """'"""
+        cursor.execute(sentencia1)
+
+        sentencia2 = """DELETE FROM ProduceVenta WHERE TRIM(idPedido) = '""" + idPedido + """'"""
+        cursor.execute(sentencia2)
+        
+        sentencia3 = """DELETE FROM ClienteRealizaPedido WHERE TRIM(idPedido) = '""" + idPedido + """'"""
+        cursor.execute(sentencia3)
+
+
+        conexion.commit()
+        print(f"Cliente con idPedido {idPedido} eliminado/a correctamente")
+        print("Consulta SQL:", cursor.statement)
+
+    except Exception as error:
+        print(f"Error al eliminar el cliente de la base de datos: {error}")
+        conexion.rollback()
+
+    finally:
+        if cursor:
+            cursor.close()
+
+
+# FIN
 
 
 @app.route('/caso1.html')
