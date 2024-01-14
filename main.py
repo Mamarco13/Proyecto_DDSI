@@ -25,7 +25,7 @@ cursorInsertar.execute("Drop table CreaPromocion")
 
 #Tabla RecibeSueldo
 consulta = """CREATE TABLE RecibeSueldo(
-    DNI VARCHAR2(9) UNIQUE,
+    DNI VARCHAR2(11) UNIQUE,
     IDSUELDO VARCHAR2(15) UNIQUE,
     IBAN VARCHAR2(24),
     Cantidad NUMBER,
@@ -36,7 +36,7 @@ cursorInsertar.execute(consulta)
 
 #Tabla EmpleadoRecibe
 consulta = """CREATE TABLE EmpleadoRecibe(
-    DNI VARCHAR2(9) UNIQUE,
+    DNI VARCHAR2(11) UNIQUE,
     idSueldo VARCHAR2(15),
     Nombre VARCHAR2(20),
     Apellidos VARCHAR2(50), 
@@ -55,7 +55,7 @@ consulta = """CREATE TABLE CreaPromocion (
     Productos VARCHAR2(500),
     Nombre VARCHAR2(20),
     F_ini TIMESTAMP,
-    F_fin TIMESTAMP """
+    F_fin TIMESTAMP) """
 
 cursorInsertar.execute(consulta)
 
@@ -114,7 +114,7 @@ cursorInsertar.execute(consulta)
 
 #Tabla GestionaPedido
 consulta = """CREATE TABLE GestionaPedido(
-    idCliente VARCHAR2(9),
+    idCliente VARCHAR2(15),
     idPedido VARCHAR2(15),
     tipoPedido VARCHAR2(50),
     ingredientes VARCHAR2(500),

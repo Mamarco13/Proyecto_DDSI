@@ -7,25 +7,25 @@
 
 <h1>Insercion de tuplas</h1><br><br>
 <h2>CrearPromoción</h2>
-    <form action="/crear-promo" method="post">
+    <form action="/insertarPromocion" method="post">
         <!--Código (CP), Tipo, Productos, Nombre, Fecha_inicio, Fecha_fin-->
-        <label for="IDPromoción">ID Promoción: </label>
-        <input type="text" name="idPromoción" id="idPromoción"><br>
+        <label for="idPromocion">ID Promoción: </label>
+        <input type="text" name="idPromocion" id="idPromocion"><br>
+        
+        <label for="Tipo">Tipo: </label>
+        <input type="text" name="Tipo" id="Tipo"><br><br>
 
+        <label for="productos">Productos: </label>
+        <input type="text" name="Productos" id="Productos"><br><br>    
+        
         <label for="nombre">Nombre: </label>
         <input type="text" name="Nombre" id="Nombre"><br><br>
         
-        <label for="tipo">Tipo: </label>
-        <input type="text" name="Tipo" id="Tipo"><br><br>
-        
-        <label for="productos">Productos: </label>
-        <input type="text" name="Productos" id="Productos"><br><br>    
+        <label for="F_ini">Fecha inicio: </label>
+        <input type="date" name="F_ini" id="F_ini"><br>
 
-        <label for="fecha-inicio">Fecha inicio: </label>
-        <input type="date" name="fecha-inicio" id="fecha-inicio"><br>
-
-        <label for="fecha-fin">Fecha fin: </label>
-        <input type="date" name="fecha-fin" id="fecha-fin"><br>
+        <label for="F_fin">Fecha fin: </label>
+        <input type="date" name="F_fin" id="F_fin"><br>
 
         <button type="submit">Enviar</button>
     </form>

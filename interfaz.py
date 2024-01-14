@@ -371,11 +371,11 @@ def procesar_proveedor(conexion, idProveedor, dineroGastado, nombre, productos):
         conexion = conectar_base_de_datos()
         cursor = conexion.cursor()
         
-        sentencia1 = """INSERT INTO ProveedorProvoca 
-                 (idProveedor, dineroGastado, nombre, productos) 
-                 VALUES (' """ + idProveedor +""" ', ' """ + dineroGastado +""" ', ' """ + nombre +""" ', ' """ + productos +""" ')"""
+        sentencia1 = """INSERT INTO CreaPromocion 
+                 (idPromocion, Tipo, Productos, Nombre, F_ini, F_fin) 
+                 VALUES (:idPromocion, :tipo, :productos, :nombre, TO_TIMESTAMP(:F_INI, 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP(:F_FIN, 'YYYY-MM-DD HH24:MI:SS'))"""
 
-        cursor.execute(sentencia1)
+        cursor.execute(sentencia1, {'idPromocion': idPromocion, 'tipo': tipo, 'productos': productos, 'nombre': nombre, 'F_INI': F_INI, 'F_FIN': F_FIN})
 
         conexion.commit()
         print("Datos procesados correctamente")
@@ -388,16 +388,17 @@ def procesar_proveedor(conexion, idProveedor, dineroGastado, nombre, productos):
     finally:
         if cursor:
             cursor.close()
-#MARKETING 
 
-def procesar_promocion(conexion, DNI, idPromocion, tipo, productos, nombre, F_INI, F_FIN):
+#MARKETING 
+            
+def procesar_promocion(conexion, idPromocion, tipo, productos, nombre, F_INI, F_FIN):
     try:
         conexion = conectar_base_de_datos()
         cursor = conexion.cursor()
         
         sentencia1 = """INSERT INTO CreaPromocion 
-                 (DNI, idPromocion, Tipo, Productos, Nombre, F_ini, F_fin) 
-                 VALUES (' """ + DNI +""" ', ' """ + idPromocion +""" ', ' """ + tipo +""" ', ' """ + productos +""" ', ' """+nombre+""" ',
+                 (idPromocion, Tipo, Productos, Nombre, F_ini, F_fin) 
+                 VALUES (' """ + idPromocion +""" ', ' """ + tipo +""" ', ' """ + productos +""" ', ' """+nombre+""" ',
                  TO_TIMESTAMP(' """ +F_INI + """ ', 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP(' """ +F_FIN + """ ', 'YYYY-MM-DD HH24:MI:SS'))"""
 
         cursor.execute(sentencia1)
@@ -414,7 +415,128 @@ def procesar_promocion(conexion, DNI, idPromocion, tipo, productos, nombre, F_IN
         if cursor:
             cursor.close()
 
+# Insertar promocion
+@app.route('/insertarPromocion', methods=['POST'])
+def insertar_promocion():
+    try:
+        image_url = url_for('static', filename='logo.jpeg')
 
+        if request.method == 'POST':
+            idPromocion = request.form['idPromocion']
+            tipo = request.form['Tipo']
+            productos = request.form['Productos']
+            nombre = request.form['Nombre']
+            F_INI = request.form['F_ini']
+            F_FIN = request.form['F_fin']
+            
+            conexion = conectar_base_de_datos()
+
+            if conexion:
+                procesar_promocion(conexion, idPromocion, tipo, productos, nombre, F_INI, F_FIN)
+
+            cerrar_conexion(conexion)
+            return render_template('index.html', image_url=image_url)
+                
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=image_url)
+
+# Eliminar promocion
+
+@app.route('/EliminaC8', methods=['POST'])
+def eliminar_promo_route():
+    try:
+        if request.method == 'POST':
+            idPromocion = request.form['idPromocion']
+
+            conexion = conectar_base_de_datos()
+
+            if conexion:
+                eliminar_promo(conexion, idPromocion)
+
+            cerrar_conexion(conexion)
+            return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+
+def eliminar_promo(conexion, idPromocion):
+    try:
+        conexion = conectar_base_de_datos()
+        cursor = conexion.cursor()
+
+        sentencia1 = """DELETE FROM CreaPromocion WHERE idPromocion = '""" + idPromocion + """'"""
+        cursor.execute(sentencia1)
+
+        conexion.commit()
+        print(f"Promoción con idPromocion {idPromocion} eliminada correctamente")
+        print("Consulta SQL:", cursor.statement)
+
+    except Exception as error:
+        print(f"Error al eliminar la promoción de la base de datos: {error}")
+        conexion.rollback()
+
+    finally:
+        if cursor:
+            cursor.close()
+
+# Eliminar cliente
+
+@app.route('/EliminaC20', methods=['POST'])
+def eliminar_cliente_route():
+    try:
+        if request.method == 'POST':
+            idCliente = request.form['idCliente']
+            print(f"ID Cliente recibido: {idCliente}")
+
+
+            conexion = conectar_base_de_datos()
+
+            if conexion:
+                eliminar_cliente(conexion, idCliente)
+
+            cerrar_conexion(conexion)
+            return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+    except Exception as e:
+        print(f"Error no manejado: {str(e)}")
+        return render_template('error.html', mensaje=f"Error no manejado: {str(e)}")
+
+    return render_template('index.html', image_url=url_for('static', filename='logo.jpeg'))
+
+
+def eliminar_cliente(conexion, idCliente):
+    try:
+        cursor = conexion.cursor()
+
+        sentencia1 = """DELETE FROM GestionaPedido WHERE idCliente = '""" + idCliente + """'"""
+        cursor.execute(sentencia1)
+
+        sentencia2 = """DELETE FROM ProduceVenta WHERE idCliente = '""" + idCliente + """'"""
+        cursor.execute(sentencia2)
+        
+        sentencia3 = """DELETE FROM ClienteRealizaPedido WHERE idCliente = '""" + idCliente + """'"""
+        cursor.execute(sentencia3)
+
+
+
+        conexion.commit()
+        print(f"Cliente con idCliente {idCliente} eliminado/a correctamente")
+        print("Consulta SQL:", cursor.statement)
+
+    except Exception as error:
+        print(f"Error al eliminar el cliente de la base de datos: {error}")
+        conexion.rollback()
+
+    finally:
+        if cursor:
+            cursor.close()
 
 # FIN MARKETING
 
